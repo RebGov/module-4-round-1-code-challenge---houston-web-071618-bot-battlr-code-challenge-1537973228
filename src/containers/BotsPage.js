@@ -9,11 +9,26 @@ class BotsPage extends React.Component {
     this.state= {
       allBots: [],
       // currentBot: {},
-      armyCollection: [],
+      armyBots: [],
       loaded: false
 
     }
   }
+
+  enlistBot= (bot) => {
+    console.log("botsPage: ", bot)
+    if(!this.state.armyBots.includes(bot)) {
+      return this.setState(state => {
+        state.armyBots.push(bot)
+        return state
+      })
+    }
+  }
+  //
+  // } //this works can do more - like
+
+   // this.setState({ armyBots: [ ...this.state.armyBots, bot ]})
+
 
 
   componentDidMount(){
@@ -30,9 +45,9 @@ class BotsPage extends React.Component {
           //   bot_class: robots[0].bot_class,
           //   catchphrase: robots[0].Catchphrase,
           //   image: robots[0].avatar_url
-          // },
+          // },//not needed lol
           allBots: robots,
-          armyCollection: [],
+          armyBots: [],
           loaded: true
         });
 
@@ -48,11 +63,15 @@ class BotsPage extends React.Component {
       <div>
 
         <YourBotArmy
-        armyCollection={this.state.armyCollection}/>
+        armyBots={this.state.armyBots}
+
+      />
         <BotCollection
           allBots={this.state.allBots}
+          enlistBot={this.enlistBot}
+          // handleClick={this.handleClickAddBotCardToArmy}
           // currentBot={this.state.currentBot}
-        
+
         />
       </div>
     );
